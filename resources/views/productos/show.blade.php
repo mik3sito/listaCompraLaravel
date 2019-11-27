@@ -2,7 +2,7 @@
 
 @section('content')
 
-    Detalle Producto {{ $arrayProductos[0] }}
+    Detalle Producto {{ $producto->nombre}}
     <div class="row">
 
         <div class="col-sm-4">
@@ -12,12 +12,20 @@
         </div>
         <div class="col-sm-8">
 
-            <h1>{{$arrayProductos[0]}}</h1>
-            <h2>Categoria :{{$arrayProductos[1]}}</h2>
-            <h3>Estado: Producto actualmente comprado</h3>
+            <h1>{{$producto->nombre}}</h1>
+            <h2>Categoria :{{$producto->categoria}}</h2>
+            <h3>Estado:
+              @if($producto->pendiente)
+              Producto actualmente comprado
+              @else
+              Producto en stock
+              @endif
+            </h3>
             <button type="button" class="btn btn-danger">Pendiente de compra</button>
-            <button type="button" class="btn btn-warning">Editar Producto</button>
-            <button type="button" class="btn btn-default">Volver al listado</button>
+            <a class="btn btn-warning" href="{{ url('/productos/edit/' . $producto->id ) }}">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                Editar producto</a>
+            <a class="btn btn-outline-info" href="{{ action('ProductoController@getIndex') }}">Volver al listado</a>
         </div>
     </div>
 
